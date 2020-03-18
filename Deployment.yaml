@@ -23,8 +23,8 @@ spec:
           ports:
             - containerPort: 8081
           volumeMounts:
-            - name: nexus-data
+            - name: nexus-volume
               mountPath: /nexus-data
       volumes:
-        - name: nexus-data
+        - name: nexus-volume
           emptyDir: {}
