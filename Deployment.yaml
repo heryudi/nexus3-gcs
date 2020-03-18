@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nexus
+  namespace: nexus-repository
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nexus-gcs-server
+    spec:
+      containers:
+        - name: nexus
+          image: heryudi/nexus3-gcs:latest
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8081
+          volumeMounts:
+            - name: nexus-data
+              mountPath: /nexus-data
+      volumes:
+        - name: nexus-data
+          persistentVolumeClaim:
+          claimName: nexus-claim
