@@ -27,5 +27,4 @@ spec:
               mountPath: /nexus-data
       volumes:
         - name: nexus-data
-          persistentVolumeClaim:
-          claimName: nexus-volume
+          emptyDir: {}
